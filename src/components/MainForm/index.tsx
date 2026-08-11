@@ -8,6 +8,7 @@ import { getNextCycleType } from "../../utils/getNextCycleType";
 import { Cycles } from "../Cycles";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
+import { Tips } from "../Tips";
 
 export function MainForm() {
     const { state, dispatch } = useTaskContent();
@@ -41,6 +42,7 @@ export function MainForm() {
     function handleInterruptTask() {
         dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
     }
+
     return (
         <form onSubmit={handleCreateNewTask} action={""} className='form'>
             <div className='formRow'>
@@ -54,7 +56,7 @@ export function MainForm() {
                 />
             </div>
             <div className='formRow'>
-                <p>Lorem ipsum dolor sit amet.</p>
+                <Tips />
             </div>
             {state.currentCycle > 0 && (
                 <div className='formRow'>
