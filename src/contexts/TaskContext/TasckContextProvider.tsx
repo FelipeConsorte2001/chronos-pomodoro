@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from "react";
 import { TimerWorkerManager } from "../../workers/TimerWorkerManager";
 import { initialState } from "./initialTaskState";
+import { TaskActionTypes } from "./taskActions";
 import { TaskContext } from "./TaskContext";
 import { taskReducer } from "./taskReducer";
 
@@ -12,27 +13,36 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
     const [state, dispatch] = useReducer(taskReducer, initialState);
 
     useEffect(() => {
+        if (!state.activeTask) return;
+
         const worker = TimerWorkerManager.getInstance();
 
-        worker.onmessage(e => {
-            const countDownSeconds = e.data;
+        worker.onmessage(event => {
+            const countDownSeconds = event.data;
             console.log(countDownSeconds);
 
             if (countDownSeconds <= 0) {
-                console.log("Worker COMPLETED");
+                dispatch({ type: TaskActionTypes.COMPLETE_TASK });
                 worker.terminate();
+                return;
             }
+
+            dispatch({
+                type: TaskActionTypes.COUNT_DOWN,
+                payload: { secondsRemaining: countDownSeconds },
+            });
         });
 
+        worker.postmessage(state);
+
         return () => {
-            console.log("Worker finished by cleanup on component");
             worker.terminate();
         };
-    }, []);
+    }, [state.activeTask?.id]);
 
     useEffect(() => {
         const worker = TimerWorkerManager.getInstance();
-
+        console.log(state);
         if (!state.activeTask) {
             console.log("Worker finishhed by missing activeTask");
             worker.terminate();
