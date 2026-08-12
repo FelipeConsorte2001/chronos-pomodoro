@@ -41,6 +41,7 @@ export function MainForm() {
         showMessage.success("Tarefa iniciada");
         dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
     }
+    const lastTaskName = state.tasks[state.tasks.length - 1]?.name || "";
 
     function handleInterruptTask() {
         showMessage.dismiss();
@@ -75,6 +76,7 @@ export function MainForm() {
                         title='Iniciar nova tarefa'
                         icon={<PlayCircleIcon />}
                         key={"submit"}
+                        defaultValue={lastTaskName}
                     />
                 )}
                 {!!state.activeTask && (

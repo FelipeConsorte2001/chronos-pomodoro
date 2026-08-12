@@ -18,11 +18,8 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
         if (!state.activeTask) return;
 
         const worker = TimerWorkerManager.getInstance();
-
         worker.onmessage(event => {
             const countDownSeconds = event.data;
-            console.log(countDownSeconds);
-
             if (countDownSeconds <= 0) {
                 if (playBeepRef.current) {
                     playBeepRef.current();
@@ -55,6 +52,7 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
             worker.terminate();
             return;
         }
+        document.title = `${state.formattedSecondsRemaining} - Chronos Pomodoro`;
 
         worker.postmessage(state);
     }, [state]);
