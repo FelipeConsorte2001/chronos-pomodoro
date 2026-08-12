@@ -1,10 +1,13 @@
 import { Bounce, ToastContainer } from "react-toastify";
+import { useThemeContent } from "../../contexts/ThemeContext/useThemeContext";
 
 interface MessagesContainerProps {
     children: React.ReactNode;
 }
 
 export function MessagesContainer({ children }: MessagesContainerProps) {
+    const { theme } = useThemeContent();
+
     return (
         <>
             {children}
@@ -18,7 +21,7 @@ export function MessagesContainer({ children }: MessagesContainerProps) {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-                theme='dark'
+                theme={theme === "dark" ? "light" : "dark"}
                 transition={Bounce}
             />
         </>
