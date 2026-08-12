@@ -1,9 +1,9 @@
-import { useTaskContent } from "../../contexts/TaskContext/useTaskContext";
+import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
 
 export function Tips() {
-    const { state } = useTaskContent();
+    const { state } = useTaskContext();
     const nextCycle = getNextCycle(state.currentCycle);
     const nextCyleType = getNextCycleType(nextCycle);
 

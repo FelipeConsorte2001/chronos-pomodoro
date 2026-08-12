@@ -1,26 +1,26 @@
-import { useTaskContent } from '../../contexts/TaskContext/useTaskContext';
-import { getNextCycle } from '../../utils/getNextCycle';
-import { getNextCycleType } from '../../utils/getNextCycleType';
-import styles from './styles.module.css';
+import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
+import { getNextCycle } from "../../utils/getNextCycle";
+import { getNextCycleType } from "../../utils/getNextCycleType";
+import styles from "./styles.module.css";
 
 export function Cycles() {
-    const { state } = useTaskContent()
+    const { state } = useTaskContext();
 
     const cycleDescriptionMap = {
-        workTime: 'foco',
-        shortBreakTime: 'decanso curso',
-        longBreakTime: 'descanso longo',
+        workTime: "foco",
+        shortBreakTime: "decanso curso",
+        longBreakTime: "descanso longo",
     };
 
-    const cycleStep = Array.from({ length: state.currentCycle })
+    const cycleStep = Array.from({ length: state.currentCycle });
     return (
         <>
             <div className={styles.cycles}>
                 <span>Ciclos:</span>
                 <div className={styles.cycleDots}>
                     {cycleStep.map((_, key) => {
-                        const nextCycle = getNextCycle(key)
-                        const nextCycleType = getNextCycleType(nextCycle)
+                        const nextCycle = getNextCycle(key);
+                        const nextCycleType = getNextCycleType(nextCycle);
                         return (
                             <span
                                 key={nextCycle}
@@ -28,10 +28,10 @@ export function Cycles() {
                                 aria-label={`Indicador de ciclo de ${cycleDescriptionMap[nextCycleType]}`}
                                 title={`Indicador de ciclo de ${cycleDescriptionMap[nextCycleType]}`}
                             />
-                        )
+                        );
                     })}
                 </div>
             </div>
         </>
-    )
+    );
 }

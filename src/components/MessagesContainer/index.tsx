@@ -1,12 +1,12 @@
 import { Bounce, ToastContainer } from "react-toastify";
-import { useThemeContent } from "../../contexts/ThemeContext/useThemeContext";
+import { useThemeContext } from "../../contexts/ThemeContext/useThemeContext";
 
 interface MessagesContainerProps {
     children: React.ReactNode;
 }
 
 export function MessagesContainer({ children }: MessagesContainerProps) {
-    const { theme } = useThemeContent();
+    const { theme } = useThemeContext();
 
     return (
         <>

@@ -2,7 +2,7 @@ import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
 import { useRef } from "react";
 import { showMessage } from "../../adapters/showMessage";
 import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
-import { useTaskContent } from "../../contexts/TaskContext/useTaskContext";
+import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import type { TaskModel } from "../../models/TaskModel";
 import { getNextCycle } from "../../utils/getNextCycle";
 import { getNextCycleType } from "../../utils/getNextCycleType";
@@ -12,7 +12,7 @@ import { DefaultInput } from "../DefaultInput";
 import { Tips } from "../Tips";
 
 export function MainForm() {
-    const { state, dispatch } = useTaskContent();
+    const { state, dispatch } = useTaskContext();
     const taskNameInput = useRef<HTMLInputElement>(null);
 
     const nextCycle = getNextCycle(state.currentCycle);
