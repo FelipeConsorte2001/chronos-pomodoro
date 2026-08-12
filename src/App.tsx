@@ -1,9 +1,15 @@
-import { TaskContextProvider } from './contexts/TaskContext/TasckContextProvider';
-import { Home } from './pages/Home';
-import './styles/global.css';
-import './styles/theme.css';
-
+import { MessagesContainer } from "./components/MessagesContainer";
+import { TaskContextProvider } from "./contexts/TaskContext/TaskContextProvider";
+import { Home } from "./pages/Home";
+import "./styles/global.css";
+import "./styles/theme.css";
 
 export default function App() {
-    return <TaskContextProvider> <Home /> </TaskContextProvider>
+    return (
+        <TaskContextProvider>
+            <MessagesContainer>
+                <Home />
+            </MessagesContainer>
+        </TaskContextProvider>
+    );
 }
