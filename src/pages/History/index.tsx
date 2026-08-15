@@ -1,5 +1,5 @@
 import { TrashIcon } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { showMessage } from "../../adapters/showMessage";
 import { Container } from "../../components/Container";
 import { DefaultButton } from "../../components/DefaultButton";
@@ -48,18 +48,12 @@ export function History() {
         });
     }
 
-    useEffect(() => {
-        if (!confirmClearHistory) return;
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setConfirmClearHistory(false);
-
-        dispatch({ type: TaskActionTypes.RESET_STATE });
-    }, [confirmClearHistory, dispatch]);
-
     function handleReseteHistory() {
         showMessage.dismiss();
         showMessage.confirm("Tem certeza?", confirmation => {
-            setConfirmClearHistory(confirmation);
+            if (confirmation) {
+                dispatch({ type: TaskActionTypes.RESET_STATE });
+            }
         });
     }
 
