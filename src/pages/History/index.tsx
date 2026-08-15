@@ -1,5 +1,6 @@
 import { TrashIcon } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { showMessage } from "../../adapters/showMessage";
 import { Container } from "../../components/Container";
 import { DefaultButton } from "../../components/DefaultButton";
 import { Heading } from "../../components/Heading";
@@ -13,6 +14,7 @@ import styles from "./styles.module.css";
 
 export function History() {
     const { state, dispatch } = useTaskContext();
+    const [confirmClearHistory, setConfirmClearHistory] = useState(false);
     const [sortTasksOptions, setSortTaskOptions] = useState<SortTasksOptions>(
         () => {
             return {
@@ -46,10 +48,19 @@ export function History() {
         });
     }
 
-    function handleReseteHistory() {
-        if (!confirm("Tem certeza?")) return;
+    useEffect(() => {
+        if (!confirmClearHistory) return;
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setConfirmClearHistory(false);
 
         dispatch({ type: TaskActionTypes.RESET_STATE });
+    }, [confirmClearHistory, dispatch]);
+
+    function handleReseteHistory() {
+        showMessage.dismiss();
+        showMessage.confirm("Tem certeza?", confirmation => {
+            setConfirmClearHistory(confirmation);
+        });
     }
 
     return (
