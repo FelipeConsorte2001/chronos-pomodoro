@@ -14,7 +14,6 @@ import styles from "./styles.module.css";
 
 export function History() {
     const { state, dispatch } = useTaskContext();
-    const [confirmClearHistory, setConfirmClearHistory] = useState(false);
     const [sortTasksOptions, setSortTaskOptions] = useState<SortTasksOptions>(
         () => {
             return {
