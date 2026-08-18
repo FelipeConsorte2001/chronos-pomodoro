@@ -24,8 +24,6 @@ export function AboutPomodoro() {
                         descansos para evitar o cansaço mental.
                     </p>
 
-                    <img src='https://placehold.co/1920x1080' alt='' />
-
                     <h2>Como funciona o Pomodoro tradicional?</h2>
                     <ul>
                         <li>
@@ -64,10 +62,10 @@ export function AboutPomodoro() {
                     <h3>⚙️ Personalização do tempo</h3>
                     <p>
                         Você pode configurar o tempo de foco, descanso curto e
-                        descanso longo do jeito que quiser! Basta acessar a
+                        descanso longo do jeito que quiser! Basta acessar a{" "}
                         <RouterLink href='/settings'>
                             página de configurações
-                        </RouterLink>
+                        </RouterLink>{" "}
                         e ajustar os minutos como preferir.
                     </p>
 
@@ -129,10 +127,10 @@ export function AboutPomodoro() {
                     </ul>
 
                     <p>
-                        <strong>Pronto pra focar?</strong> Bora lá
+                        <strong>Pronto pra focar?</strong> Bora lá{" "}
                         <RouterLink href='/'>
                             voltar para a página inicial
-                        </RouterLink>
+                        </RouterLink>{" "}
                         e iniciar seus Pomodoros! 🍅🚀
                     </p>
 
