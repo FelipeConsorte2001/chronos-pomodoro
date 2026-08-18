@@ -1,5 +1,5 @@
 import { SaveIcon } from "lucide-react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { showMessage } from "../../adapters/showMessage";
 import { Container } from "../../components/Container";
 import { DefaultButton } from "../../components/DefaultButton";
@@ -46,6 +46,10 @@ export function Settings() {
         });
         showMessage.success("Configurações salvas");
     }
+
+    useEffect(() => {
+        document.title = "Entenda a Técnica Pomodoro - Chronos Pomodoro";
+    }, []);
 
     return (
         <MainTemplate>

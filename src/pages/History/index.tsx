@@ -1,5 +1,5 @@
 import { TrashIcon } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { showMessage } from "../../adapters/showMessage";
 import { Container } from "../../components/Container";
 import { DefaultButton } from "../../components/DefaultButton";
@@ -23,6 +23,9 @@ export function History() {
             };
         },
     );
+    useEffect(() => {
+        document.title = "Histórico - Chronos Pomodoro";
+    }, []);
     const hasTasks = state.tasks.length > 0;
 
     const sortedTasks = useMemo(() => {
