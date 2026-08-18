@@ -7,6 +7,7 @@ export const TaskActionTypes = {
     RESET_STATE: "RESET_STATE",
     COUNT_DOWN: "COUNT_DOWN",
     COMPLETE_TASK: "COMPLETE_TASK",
+    CHANGE_SETTINGS: "CHANGE_SETTINGS",
 } as const;
 
 export type TaskActionTypes =
@@ -20,6 +21,10 @@ export type TaskActionsWithPayload =
     | {
           type: typeof TaskActionTypes.COUNT_DOWN;
           payload: Pick<TaskStateModel, "secondsRemaining">;
+      }
+    | {
+          type: typeof TaskActionTypes.CHANGE_SETTINGS;
+          payload: TaskStateModel["config"];
       };
 
 export type TaskActionsWithoutPayload =

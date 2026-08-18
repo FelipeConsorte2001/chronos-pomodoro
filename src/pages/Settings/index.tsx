@@ -5,11 +5,12 @@ import { Container } from "../../components/Container";
 import { DefaultButton } from "../../components/DefaultButton";
 import { DefaultInput } from "../../components/DefaultInput";
 import { Heading } from "../../components/Heading";
+import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { MainTemplate } from "../../templates/MainTemplate";
 
 export function Settings() {
-    const { state } = useTaskContext();
+    const { state, dispatch } = useTaskContext();
     const workTimeInputRef = useRef<HTMLInputElement>(null);
     const shortBreakInputRef = useRef<HTMLInputElement>(null);
     const longBreakInputRef = useRef<HTMLInputElement>(null);
@@ -35,7 +36,15 @@ export function Settings() {
             showMessage.error(
                 "Digite valores entre 1 e 60 para descanso longo",
             );
-        console.log("passo");
+        dispatch({
+            type: TaskActionTypes.CHANGE_SETTINGS,
+            payload: {
+                workTime,
+                shortBreakTime,
+                longBreakTime,
+            },
+        });
+        showMessage.success("Configurações salvas");
     }
 
     return (
